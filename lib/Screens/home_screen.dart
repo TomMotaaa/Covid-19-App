@@ -1,8 +1,5 @@
 import 'package:covid_19_app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,12 +17,13 @@ class HomeScreen extends StatelessWidget {
       elevation: 0,
       leading: IconButton(
         onPressed: () {}, 
-        icon: SvgPicture.asset("assets/icons/menu.svg")
+        icon: const Icon(Icons.menu, color: kPrimaryColor, size: 30.0)
       ),
       actions: [
         IconButton(
           onPressed: () {}, 
-          icon: SvgPicture.asset("assets/icons/search.svg"))
+          icon: const Icon(Icons.search, color: kPrimaryColor, size: 30.0,)
+        )
       ],
     );
   }
