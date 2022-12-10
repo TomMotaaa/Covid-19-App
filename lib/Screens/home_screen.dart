@@ -1,5 +1,5 @@
 import 'package:covid_19_app/constants.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:covid_19_app/widgets/info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -10,89 +10,80 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Container(
-        padding: const EdgeInsets.only(left: 20, top: 20, right: 20 ,bottom: 40),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: kPrimaryColor.withOpacity(0.03),
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(50),
-            bottomRight: Radius.circular(50),
-          )
-        ),
-        child: Wrap(
-          children: [
-            Container(
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8)
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFF9C00).withOpacity(0.12),
-                            shape: BoxShape.circle
-                          ),
-                          child: SvgPicture.asset(
-                            "assets/icons/running.svg", 
-                            height: 12, 
-                            width: 12,
-                          ),
-                        ),
-                        const SizedBox(width: 5,),
-                        const Text(
-                          "Casos Confirmados",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      ],
-                    ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.only(left: 20, top: 20, right: 20 ,bottom: 40),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: kPrimaryColor.withOpacity(0.03),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(50),
+                bottomRight: Radius.circular(50),
+              )
+            ),
+            child: Wrap(
+              runSpacing: 20,
+              spacing: 20,
+              children: const [
+                InfoCard(
+                  title: "Casos Confirmados",
+                  iconColor: Color(0xFFFF8C00),
+                  effectedNum: 1062,
+                ),
+                InfoCard(
+                  title: "Total de Mortes",
+                  iconColor: Color(0xFFFF2D55),
+                  effectedNum: 75,
+                ),
+                InfoCard(
+                  title: "Total de Recuperados",
+                  iconColor: Color(0xFF50E3C2),
+                  effectedNum: 689,
+                ),
+                InfoCard(
+                  title: "Novos Casos",
+                  iconColor: Color(0xFF5056D6),
+                  effectedNum: 52,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20,),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Prevenções",
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: RichText(text: TextSpan(
-                          style: const TextStyle(
-                            color: kTextColor
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "1.062 \n",
-                              style: 
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold
-                              )
-                            ),
-                            const TextSpan(
-                              text: "Pessoas",
-                              style: TextStyle(
-                                fontSize: 12,
-                                height: 2,
-                              )
-                            )
-                          ]
-                        )),
-                      ),
-                      const Expanded(
-                        child: LineReportChart()
-                      )
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+                const SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    PreventionCard(
+                      svgSrc: "assets/icons/hand_wash.svg",
+                      title: "Lave as Mãos",
+                    ),
+                    PreventionCard(
+                      svgSrc: "assets/icons/use_mask.svg",
+                      title: "Use Máscara",
+                    ),
+                    PreventionCard(
+                      svgSrc: "assets/icons/Clean_Disinfect.svg",
+                      title: "Limpe/Desinfete",
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
       )
     );
   }
@@ -115,39 +106,25 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class LineReportChart extends StatelessWidget {
-  const LineReportChart({super.key});
+class PreventionCard extends StatelessWidget {
+  final String svgSrc;
+  final String title;
+  const PreventionCard({
+    Key? key, required this.svgSrc, required this.title,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 2.2,
-      child: LineChart(
-        LineChartData(
-          lineBarsData: [
-            LineChartBarData(
-              spots: getSports(),
-            )
-          ],
+    return Column(
+      children: [
+        SvgPicture.asset(svgSrc),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: kPrimaryColor,
+          ),
         )
-      ),
+      ],
     );
-  }
-
-  List<FlSpot> getSports() {
-    return [
-      const FlSpot(0, .5),
-      const FlSpot(1, 1.5),
-      const FlSpot(2, .5),
-      const FlSpot(3, .7),
-      const FlSpot(4, .2),
-      const FlSpot(5, 2),
-      const FlSpot(6, 1.5),
-      const FlSpot(7, 1.7),
-      const FlSpot(8, 1),
-      const FlSpot(9, 2.8),
-      const FlSpot(10, 2.5),
-      const FlSpot(11, 2.65),
-    ];
   }
 }
