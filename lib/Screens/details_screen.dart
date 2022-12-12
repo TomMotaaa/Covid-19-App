@@ -12,92 +12,94 @@ class DetailsScreen extends StatelessWidget {
       appBar: buildDetailsAppBar(context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 25,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      offset: const Offset(0, 21),
-                      blurRadius: 53,
-                      color: Colors.black.withOpacity(0.05)
-                  )
-                ]
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildTitleWithMoreIcon(),
-                  const SizedBox(height: 15,),
-                  buildCaseNumber(context),
-                  const SizedBox(height: 15,),
-                  const Text(
-                    "Do Centro de Saúde",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w200,
-                      color: kTextMediumColor,
-                      fontSize: 16
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 25,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                        offset: const Offset(0, 21),
+                        blurRadius: 53,
+                        color: Colors.black.withOpacity(0.05)
+                    )
+                  ]
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildTitleWithMoreIcon(),
+                    const SizedBox(height: 15,),
+                    buildCaseNumber(context),
+                    const SizedBox(height: 15,),
+                    const Text(
+                      "Do Centro de Saúde",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w200,
+                        color: kTextMediumColor,
+                        fontSize: 16
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 15,),
-                  const WeeklyChart(),
-                  const SizedBox(height: 15,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      buildInfoTextWithPercentage(
-                        percentage: "6,43",
-                        title: "Na Última Semana",
-                      ),
-                      buildInfoTextWithPercentage(
-                        percentage: "9,43",
-                        title: "Taxa de Recuperação",
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 20,),
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 21),
-                    blurRadius: 54,
-                    color: Colors.black.withOpacity(0.05)
-                  )
-                ]
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Mapa Global",
-                        style: TextStyle(
-                          fontSize: 15,
+                    const SizedBox(height: 15,),
+                    const WeeklyChart(),
+                    const SizedBox(height: 15,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        buildInfoTextWithPercentage(
+                          percentage: "6,43",
+                          title: "Na Última Semana",
                         ),
-                      ),
-                      SvgPicture.asset("assets/icons/more.svg"),
-                    ],
-                  ),
-                  const SizedBox(height: 10,),
-                  SvgPicture.asset("assets/icons/map.svg"),
-                ],
+                        buildInfoTextWithPercentage(
+                          percentage: "9,43",
+                          title: "Taxa de Recuperação",
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
-            )
-          ],
+              const SizedBox(height: 20,),
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 21),
+                      blurRadius: 54,
+                      color: Colors.black.withOpacity(0.05)
+                    )
+                  ]
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Mapa Global",
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                        SvgPicture.asset("assets/icons/more.svg"),
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    SvgPicture.asset("assets/icons/map.svg"),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

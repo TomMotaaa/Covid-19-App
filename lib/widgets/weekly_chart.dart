@@ -1,8 +1,6 @@
 import 'package:covid_19_app/constants.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class WeeklyChart extends StatelessWidget {
   const WeeklyChart({super.key});
